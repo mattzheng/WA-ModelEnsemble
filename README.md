@@ -11,9 +11,9 @@ blog链接：https://blog.csdn.net/sinat_26917383/article/details/80905004
 
 因为受其启发，所以在这提一下，快照集成是一种无需额外训练代价的多神经网络集成方法。 通过使单个神经网络沿它的优化路径进行多个局部最小化，保存模型参数。 利用多重学习速率退火循环实现了重复的快速收敛。
 
-![这里写图片描述](https://img-blog.csdn.net/20180703221005985?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NpbmF0XzI2OTE3Mzgz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![这里写图片描述](https://github.com/mattzheng/WA-ModelEnsemble/blob/master/pic/001.jpg)
 
-![这里写图片描述](https://img-blog.csdn.net/2018070322093719?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NpbmF0XzI2OTE3Mzgz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![这里写图片描述](https://github.com/mattzheng/WA-ModelEnsemble/blob/master/pic/002.jpg)
 
 
 ### 1.1 比较有意思的做法
@@ -52,6 +52,8 @@ sklearn官方案例中就有非常多的机器学习算法示例，本着实验�
    transformations with ensembles of
    trees](http://scikit-learn.org/stable/auto_examples/ensemble/plot_feature_transformation.html#sphx-glr-auto-examples-ensemble-plot-feature-transformation-py)）
 
+![这里写图片描述](https://github.com/mattzheng/WA-ModelEnsemble/blob/master/pic/003.jpg)
+
 机器学习模型除了预测还有重要的特征筛选的功能，不同的模型也有不同的重要性输出：
 
 ### 2.1 特征选择
@@ -71,7 +73,7 @@ Naive Bayes得到的是：NaiveBayes.sigma_`解释为：variance of each feature
 
 算法输出主要有：重要指标（本案例中提到的是`acc/recall`）、ROC值的计算与plot、校准曲线（Calibration curves）
 
-![这里写图片描述](https://img-blog.csdn.net/20180703223133238?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NpbmF0XzI2OTE3Mzgz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![这里写图片描述](https://github.com/mattzheng/WA-ModelEnsemble/blob/master/pic/004.jpg)
 
 该图为校准曲线（Calibration curves），Calibration curves may also be referred to as reliability diagrams. 是一种算法可靠性检验的方式。
 
