@@ -4,14 +4,17 @@ Weight Averaging Model Ensemble
 > 模型融合的方法很多，Voting、Averaging、Bagging 、Boosting、 Stacking，那么一些kaggle比赛中选手会选用各种方法进行融合，其中岭回归就是一类轻巧且非常有效的方法，当然现在还有很多更有逼格的方法。本文是受快照集成的启发，把[titu1994/Snapshot-Ensembles](https://github.com/titu1994/Snapshot-Ensembles)项目中，比较有意思的加权平均集成的内容抽取出来，单独应用。
 
 
-code正在准备更新：[mattzheng/WA-ModelEnsemble](https://github.com/mattzheng/WA-ModelEnsemble)
+blog链接：https://blog.csdn.net/sinat_26917383/article/details/80905004
 
 
 ## 1、 快照集成
+
 因为受其启发，所以在这提一下，快照集成是一种无需额外训练代价的多神经网络集成方法。 通过使单个神经网络沿它的优化路径进行多个局部最小化，保存模型参数。 利用多重学习速率退火循环实现了重复的快速收敛。
 
 ![这里写图片描述](https://img-blog.csdn.net/20180703221005985?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NpbmF0XzI2OTE3Mzgz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
 ![这里写图片描述](https://img-blog.csdn.net/2018070322093719?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NpbmF0XzI2OTE3Mzgz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
 
 ### 1.1 比较有意思的做法
 
@@ -31,6 +34,7 @@ code正在准备更新：[mattzheng/WA-ModelEnsemble](https://github.com/mattzhe
 ### 1.3 相关实现：cifar100 图像分类任务
 
 可参考项目：[titu1994/Snapshot-Ensembles](https://github.com/titu1994/Snapshot-Ensembles)
+
 该项目用keras1.1 做了cifar_10、cifar_100两套练习，使用的是比较有意思的图像框架： Wide Residual Net (16-4)。作者已经预先给定了5款训练快照，拿着5套模型的预测结果做模型集成，使使训练集和测试集上的损失函数的值达到很小。
 
 
@@ -60,6 +64,7 @@ sklearn官方案例中就有非常多的机器学习算法示例，本着实验�
  - AdaBoost `AdaBoost.feature_importances_`
  
 可以计算系数的有：线性模型，`lm.coef_` 、 SVM `svm.coef_`
+
 Naive Bayes得到的是：NaiveBayes.sigma_`解释为：variance of each feature per class`
 
 ### 2.2 机器学习算法输出
@@ -67,7 +72,9 @@ Naive Bayes得到的是：NaiveBayes.sigma_`解释为：variance of each feature
 算法输出主要有：重要指标（本案例中提到的是`acc/recall`）、ROC值的计算与plot、校准曲线（Calibration curves）
 
 ![这里写图片描述](https://img-blog.csdn.net/20180703223133238?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NpbmF0XzI2OTE3Mzgz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
 该图为校准曲线（Calibration curves），Calibration curves may also be referred to as reliability diagrams. 是一种算法可靠性检验的方式。
+
 .
 
 ----------
@@ -97,10 +104,13 @@ testY_cat为正确预测标签， final_prediction为多款模型预测概率组
 ```
 minimize(log_loss_func, prediction_weights, method='SLSQP', bounds=bounds, constraints=constraints)
 ```
+
 SciPy的optimize模块提供了许多数值优化算法，minimize就是其中一种。
 
 ### 3.2 实践
+
 具体code笔者会上传至笔者的github之上了。
+
 步骤为：
 
  - 1、随机准备数据`make_classification`
@@ -134,7 +144,9 @@ sample_N,nb_classes = preds[0].shape
 testY = y_test.reshape((len(y_test),1))  # 真实Label (2000,1)
 testY_cat = np.array([1 - y_test ,y_test]).T # (2000,2)   
 ```
+
 models_filenames 代表模型的名字；sample_N样本个数；nb_classes 分类个数（此时为2分类）；testY 真实label；testY_cat 基于真实Label简单处理。
+
 
 #### 3.2.8  基准优化策略：14套模型融合——平均
 
@@ -157,6 +169,7 @@ calculate_weighted_accuracy(prediction_weights)
 >>> Accuracy :  79.7
 >>> Recall :  0.7043390514631686
 ```
+
 对14套模型，平均权重并进行加权。可以看到结论非常差。
 
 #### 3.2.9  加权平均优化策略：14套模型融合——加权平均优化
@@ -211,6 +224,7 @@ best_acc,best_weights = MinimiseOptimize(preds,models_filenames,nb_classes,sampl
 >>> Accuracy :  90.4
 >>> Recall :  0.9112008072653885
 ```
+
 在迭代了20次之后，通过加权求得的综合预测水平，要高于平均水平很多。不过，跟一些比较出众的机器学习模型差异不大。
 
 
