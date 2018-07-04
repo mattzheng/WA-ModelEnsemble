@@ -6,7 +6,7 @@ Weight Averaging Model Ensemble
 
 blog链接：https://blog.csdn.net/sinat_26917383/article/details/80905004
 
-code：笔者正在整理...(20180703)
+code：```machineLearning14.ipynb```是主要实现；```MinimiseOptimize.py```是最小优化函数。
 
 
 ## 1、 快照集成
