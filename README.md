@@ -6,6 +6,11 @@ Weight Averaging Model Ensemble
 
 blog链接：https://blog.csdn.net/sinat_26917383/article/details/80905004
 
+2021-4-2 更新
+
+更新code：```machineLearning14_20210402.ipynb```,修复一部分变量定义的问题,导致报错。
+
+
 code：```machineLearning14.ipynb```是主要实现；```MinimiseOptimize.py```是最小优化函数。
 
 
